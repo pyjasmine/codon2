@@ -8,6 +8,8 @@ website:
       - about.qmd
       - icon: github
         href: https://github.com/pyjasmine
+    left:
+      - listings.json
 
 format:
   html:
