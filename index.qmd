@@ -2,7 +2,7 @@
 title: "codon classification project"
 listing:
   contents: posts
-  sort: "date asc"
+  sort: "title"
   type: grid
   fields: [date, title]
   categories: true
