@@ -4,14 +4,15 @@ project:
 website:
   title: "Jasmine Marzouk"
   navbar:
-    right:
+    left:
       - about.qmd
       - icon: github
         href: https://github.com/pyjasmine
-        
+      - text: 'Codon Classification Project'
+        file: ccp.qmd
 format:
   html:
-    theme: cyborg
+    theme: flatly
     css: styles.css
 
 
