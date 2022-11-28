@@ -2,9 +2,9 @@
   {
     "objectID": "about.html",
     "href": "about.html",
-    "title": "About",
+    "title": "About me",
     "section": "",
-    "text": "Hello!\nmy name is Jasmine. I come from a background of Life Sciences, with an undergraduate degree in Pharmacology and a Masters of Research in Neuroscience. I have worked in the Biotech industry for a couple of years working with induced Pluripotent Stem Cells R&D. I gained an interest in data analysis from working on an collaborative RNA sequencing project, I was curious as to how so much data could be analysed quite fast and presented in visualisations that helped us make decisions reguarding cells. From there I went on to do a summer course in Data Science, learning Python coding, data analysis, and machine learning.\n\n\n\nEducation\nData Science Diploma | 2022 BrainStation\nMRes in Biosciences: Neuroscience Stream | 2017 University College London\nBSc in Pharmacology and Physiology | 2016 University of Westminster"
+    "text": "Hello!\nmy name is Jasmine. I come from a background of Life Sciences, with an undergraduate degree in Pharmacology and a Masters of Research in Neuroscience. I have worked in the Biotech industry for a couple of years working with induced Pluripotent Stem Cells R&D. I gained an interest in data analysis from working on an collaborative RNA sequencing project, I was curious as to how so much data could be analysed quite fast and presented in visualisations that helped us make decisions reguarding cells. \nFrom there I went on to do a summer course in Data Science, learning Python coding, data analysis, and machine learning. \nThe title of the website “Bayaanat” is Arabic for Data\n\n\n\nEducation\nData Science Diploma | 2022 - BrainStation\nMRes in Biosciences: Neuroscience Stream | 2017 - University College London\nBSc in Pharmacology and Physiology | 2016 - University of Westminster"
   },
   {
     "objectID": "posts/welcome/index.html",
@@ -23,7 +23,7 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "codon classification project",
+    "title": "Codon Classification Project",
     "section": "",
     "text": "01 - Introduction\n\n\n\n\n\n\n\n\n\n\n02 - Data Cleaning\n\n\n\n\n\n\n\n\n\n\n03 - Exploratory Data Analysis\n\n\n\n\n\n\n\n\n\n\n04 - DNAtype Classification\n\n\n\n\n\n\n\n\n\n\n05 - Kingdom Classification\n\n\n\n\n\n\n\nNo matching items"
   },
