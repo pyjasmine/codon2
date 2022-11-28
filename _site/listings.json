@@ -2,12 +2,12 @@
   {
     "listing": "/index.html",
     "items": [
-      "/posts/2022-08-01-Introduction .html",
+      "/posts/02-Data-Cleaning.html",
+      "/posts/05-Kingdom-Classification.html",
+      "/posts/04-DnaType-Classification.html",
       "/posts/scrapingcodonwebsite.html",
-      "/posts/2022-08-05-Kingdom-Classification.html",
-      "/posts/2022-08-04-DnaType-Classification.html",
-      "/posts/2022-08-03-Exploratory-Data-Analysis.html",
-      "/posts/2022-08-02-Data-Cleaning.html"
+      "/posts/03-Exploratory-Data-Analysis.html",
+      "/posts/01-Introduction .html"
     ]
   }
 ]

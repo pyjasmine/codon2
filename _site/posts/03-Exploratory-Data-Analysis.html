@@ -1,0 +1,1556 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.269">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Jasmine Marzouk – exploratory-data-analysis</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Jasmine Marzouk</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="dropdown-header">
+ <span class="menu-text">listings.json</span></li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html">
+ <span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/pyjasmine"><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+
+<section id="notebook-2-exploratory-data-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="notebook-2-exploratory-data-analysis">Notebook 2: Exploratory Data Analysis</h2>
+</section>
+<section id="exploratory-data-analysis-method" class="level2">
+<h2 class="anchored" data-anchor-id="exploratory-data-analysis-method">Exploratory Data Analysis Method:</h2>
+<p>In order to explore the data set and understand what it contains I will be aiming to answer the following questions:</p>
+<ul>
+<li>What is the distribution of the target classes for Kingdom?</li>
+<li>What is the distribution of the target classes for DNAtype?</li>
+<li>What does the distribution for the Ncodons column look like?</li>
+<li>Are there codons that have a higher occurance in certain DNA types?</li>
+<li>Are there codons that have a higher occurence in certain Kingdoms?</li>
+</ul>
+<div class="cell" data-execution_count="128">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.tree <span class="im">import</span> DecisionTreeClassifier, plot_tree</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.svm <span class="im">import</span> SVC</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> Pipeline</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.neighbors <span class="im">import</span> KNeighborsClassifier</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> (GridSearchCV, cross_val_score,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>                                     train_test_split)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> (accuracy_score, auc, classification_report,</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>                             confusion_matrix, f1_score, plot_confusion_matrix,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>                             plot_roc_curve, precision_score, recall_score,</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>                             roc_auc_score, roc_curve)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.decomposition <span class="im">import</span> PCA</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> joblib</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.graph_objects <span class="im">as</span> go</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy <span class="im">import</span> stats</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>matplotlib inline</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="co"># warnings.filterwarnings("ignore")</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">123</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="129">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># importing the cleaned dataframe dfcodon1 and renaming it to codon</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>codon <span class="op">=</span> joblib.load(<span class="st">'../data/dfcodon1.pkl'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="130">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Dataframe Shape</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f'The dataframe contains </span><span class="sc">{</span>codon<span class="sc">.</span>shape[<span class="dv">0</span>]<span class="sc">}</span><span class="ss"> rows and </span><span class="sc">{</span>codon<span class="sc">.</span>shape[<span class="dv">1</span>]<span class="sc">}</span><span class="ss"> columns'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>The dataframe contains 13028 rows and 69 columns</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="131">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># peeking at the dataframe</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>codon.sample(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="131">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Kingdom</th>
+      <th>DNAtype</th>
+      <th>SpeciesID</th>
+      <th>Ncodons</th>
+      <th>SpeciesName</th>
+      <th>UUU</th>
+      <th>UUC</th>
+      <th>UUA</th>
+      <th>UUG</th>
+      <th>CUU</th>
+      <th>...</th>
+      <th>CGG</th>
+      <th>AGA</th>
+      <th>AGG</th>
+      <th>GAU</th>
+      <th>GAC</th>
+      <th>GAA</th>
+      <th>GAG</th>
+      <th>UAA</th>
+      <th>UAG</th>
+      <th>UGA</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>11544</th>
+      <td>vertebrate</td>
+      <td>1</td>
+      <td>71258</td>
+      <td>4460</td>
+      <td>mitochondrion Hypopomus occidentalis</td>
+      <td>0.01951</td>
+      <td>0.02623</td>
+      <td>0.02354</td>
+      <td>0.01076</td>
+      <td>0.03274</td>
+      <td>...</td>
+      <td>0.00740</td>
+      <td>0.00000</td>
+      <td>0.00000</td>
+      <td>0.00090</td>
+      <td>0.00269</td>
+      <td>0.01726</td>
+      <td>0.00359</td>
+      <td>0.00404</td>
+      <td>0.00314</td>
+      <td>0.03139</td>
+    </tr>
+    <tr>
+      <th>12258</th>
+      <td>mammal</td>
+      <td>0</td>
+      <td>30521</td>
+      <td>14077</td>
+      <td>Bos grunniens</td>
+      <td>0.01698</td>
+      <td>0.01954</td>
+      <td>0.00789</td>
+      <td>0.01435</td>
+      <td>0.01279</td>
+      <td>...</td>
+      <td>0.00902</td>
+      <td>0.01179</td>
+      <td>0.00980</td>
+      <td>0.02579</td>
+      <td>0.02941</td>
+      <td>0.02998</td>
+      <td>0.03467</td>
+      <td>0.00107</td>
+      <td>0.00078</td>
+      <td>0.00199</td>
+    </tr>
+    <tr>
+      <th>2177</th>
+      <td>virus</td>
+      <td>0</td>
+      <td>394337</td>
+      <td>1359</td>
+      <td>Tomato leaf curl New Delhi virus-[Multan;Luffa]</td>
+      <td>0.02134</td>
+      <td>0.02428</td>
+      <td>0.00736</td>
+      <td>0.01177</td>
+      <td>0.01545</td>
+      <td>...</td>
+      <td>0.00736</td>
+      <td>0.01472</td>
+      <td>0.01325</td>
+      <td>0.02943</td>
+      <td>0.01840</td>
+      <td>0.02796</td>
+      <td>0.01545</td>
+      <td>0.00221</td>
+      <td>0.00147</td>
+      <td>0.00221</td>
+    </tr>
+    <tr>
+      <th>11615</th>
+      <td>vertebrate</td>
+      <td>0</td>
+      <td>7792</td>
+      <td>11800</td>
+      <td>Heterodontus francisci</td>
+      <td>0.01661</td>
+      <td>0.01720</td>
+      <td>0.00712</td>
+      <td>0.01025</td>
+      <td>0.00941</td>
+      <td>...</td>
+      <td>0.00890</td>
+      <td>0.01517</td>
+      <td>0.01025</td>
+      <td>0.02017</td>
+      <td>0.02339</td>
+      <td>0.02881</td>
+      <td>0.02661</td>
+      <td>0.00068</td>
+      <td>0.00042</td>
+      <td>0.00144</td>
+    </tr>
+    <tr>
+      <th>3172</th>
+      <td>bacteria</td>
+      <td>0</td>
+      <td>320122</td>
+      <td>13771</td>
+      <td>Clostridium phage phi CD119</td>
+      <td>0.03544</td>
+      <td>0.00588</td>
+      <td>0.04480</td>
+      <td>0.01089</td>
+      <td>0.01343</td>
+      <td>...</td>
+      <td>0.00029</td>
+      <td>0.02926</td>
+      <td>0.00508</td>
+      <td>0.04647</td>
+      <td>0.01017</td>
+      <td>0.06739</td>
+      <td>0.01808</td>
+      <td>0.00334</td>
+      <td>0.00182</td>
+      <td>0.00058</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 69 columns</p>
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="132">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Describing the dataframe</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>codon.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="132">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>DNAtype</th>
+      <th>SpeciesID</th>
+      <th>Ncodons</th>
+      <th>UUU</th>
+      <th>UUC</th>
+      <th>UUA</th>
+      <th>UUG</th>
+      <th>CUU</th>
+      <th>CUC</th>
+      <th>CUA</th>
+      <th>...</th>
+      <th>CGG</th>
+      <th>AGA</th>
+      <th>AGG</th>
+      <th>GAU</th>
+      <th>GAC</th>
+      <th>GAA</th>
+      <th>GAG</th>
+      <th>UAA</th>
+      <th>UAG</th>
+      <th>UGA</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>13028.000000</td>
+      <td>13028.000000</td>
+      <td>1.302800e+04</td>
+      <td>13028.000000</td>
+      <td>13028.000000</td>
+      <td>13028.000000</td>
+      <td>13028.000000</td>
+      <td>13028.000000</td>
+      <td>13028.000000</td>
+      <td>13028.000000</td>
+      <td>...</td>
+      <td>13028.000000</td>
+      <td>13028.000000</td>
+      <td>13028.000000</td>
+      <td>13028.000000</td>
+      <td>13028.000000</td>
+      <td>13028.000000</td>
+      <td>13028.000000</td>
+      <td>13028.000000</td>
+      <td>13028.000000</td>
+      <td>13028.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>0.367209</td>
+      <td>130451.105926</td>
+      <td>7.960576e+04</td>
+      <td>0.024819</td>
+      <td>0.023440</td>
+      <td>0.020635</td>
+      <td>0.014104</td>
+      <td>0.017822</td>
+      <td>0.018286</td>
+      <td>0.019043</td>
+      <td>...</td>
+      <td>0.005452</td>
+      <td>0.009929</td>
+      <td>0.006422</td>
+      <td>0.024183</td>
+      <td>0.021164</td>
+      <td>0.028292</td>
+      <td>0.021683</td>
+      <td>0.001640</td>
+      <td>0.000590</td>
+      <td>0.006178</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>0.688726</td>
+      <td>124787.086107</td>
+      <td>7.197010e+05</td>
+      <td>0.017627</td>
+      <td>0.011597</td>
+      <td>0.020709</td>
+      <td>0.009279</td>
+      <td>0.010587</td>
+      <td>0.014572</td>
+      <td>0.024251</td>
+      <td>...</td>
+      <td>0.006601</td>
+      <td>0.008574</td>
+      <td>0.006387</td>
+      <td>0.013826</td>
+      <td>0.013038</td>
+      <td>0.014343</td>
+      <td>0.015018</td>
+      <td>0.001785</td>
+      <td>0.000882</td>
+      <td>0.010344</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>0.000000</td>
+      <td>7.000000</td>
+      <td>1.000000e+03</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>...</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>0.000000</td>
+      <td>28850.750000</td>
+      <td>1.602000e+03</td>
+      <td>0.013910</td>
+      <td>0.015380</td>
+      <td>0.005610</td>
+      <td>0.007108</td>
+      <td>0.010890</td>
+      <td>0.007830</td>
+      <td>0.005300</td>
+      <td>...</td>
+      <td>0.001220</td>
+      <td>0.001690</td>
+      <td>0.001168</td>
+      <td>0.012390</td>
+      <td>0.011860</td>
+      <td>0.017360</td>
+      <td>0.009710</td>
+      <td>0.000560</td>
+      <td>0.000000</td>
+      <td>0.000410</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>0.000000</td>
+      <td>81971.500000</td>
+      <td>2.927500e+03</td>
+      <td>0.021750</td>
+      <td>0.021905</td>
+      <td>0.015260</td>
+      <td>0.013360</td>
+      <td>0.016130</td>
+      <td>0.014560</td>
+      <td>0.009680</td>
+      <td>...</td>
+      <td>0.003530</td>
+      <td>0.009270</td>
+      <td>0.004540</td>
+      <td>0.025435</td>
+      <td>0.019070</td>
+      <td>0.026085</td>
+      <td>0.020540</td>
+      <td>0.001380</td>
+      <td>0.000420</td>
+      <td>0.001130</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>1.000000</td>
+      <td>222891.250000</td>
+      <td>9.120000e+03</td>
+      <td>0.031310</td>
+      <td>0.029210</td>
+      <td>0.029485</td>
+      <td>0.019803</td>
+      <td>0.022730</td>
+      <td>0.025110</td>
+      <td>0.017245</td>
+      <td>...</td>
+      <td>0.007150</td>
+      <td>0.015922</td>
+      <td>0.010250</td>
+      <td>0.034190</td>
+      <td>0.027690</td>
+      <td>0.036800</td>
+      <td>0.031122</td>
+      <td>0.002370</td>
+      <td>0.000830</td>
+      <td>0.002890</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>12.000000</td>
+      <td>465364.000000</td>
+      <td>4.066258e+07</td>
+      <td>0.217300</td>
+      <td>0.091690</td>
+      <td>0.151330</td>
+      <td>0.101190</td>
+      <td>0.089780</td>
+      <td>0.100350</td>
+      <td>0.163920</td>
+      <td>...</td>
+      <td>0.055540</td>
+      <td>0.098830</td>
+      <td>0.058430</td>
+      <td>0.185660</td>
+      <td>0.113840</td>
+      <td>0.144890</td>
+      <td>0.158550</td>
+      <td>0.045200</td>
+      <td>0.025610</td>
+      <td>0.106700</td>
+    </tr>
+  </tbody>
+</table>
+<p>8 rows × 67 columns</p>
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="133">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Setting a theme for all the visualisations</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>sns.set_theme(style<span class="op">=</span><span class="st">"darkgrid"</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>sns.<span class="bu">set</span>(rc<span class="op">=</span>{<span class="st">'figure.figsize'</span>: (<span class="fl">11.7</span>, <span class="fl">8.27</span>)})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
+<p>Plan for EDA: - Univariate alalysis - Bivariate analysis - Check codon distribution for each Kingdom - Check codon distribution for each DNAtype</p>
+</section>
+<section id="univariate-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="univariate-analysis">Univariate Analysis</h2>
+<p>Due to the dataframe containing 69 columns, this will be hard to visualise without breaking up the dataframe into focus points. So, I will isolate the codon columns into a separate dataframe and the rest of the columns into another one, and then do univariate analysis.</p>
+<ul>
+<li><strong>Separating the codon only columns</strong></li>
+</ul>
+<div class="cell" data-execution_count="134">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>justcodon <span class="op">=</span> codon.drop(</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    columns<span class="op">=</span>[<span class="st">'Kingdom'</span>, <span class="st">'DNAtype'</span>, <span class="st">'SpeciesID'</span>, <span class="st">'Ncodons'</span>, <span class="st">'SpeciesName'</span>], axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>justcodon.sample(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="134">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>UUU</th>
+      <th>UUC</th>
+      <th>UUA</th>
+      <th>UUG</th>
+      <th>CUU</th>
+      <th>CUC</th>
+      <th>CUA</th>
+      <th>CUG</th>
+      <th>AUU</th>
+      <th>AUC</th>
+      <th>...</th>
+      <th>CGG</th>
+      <th>AGA</th>
+      <th>AGG</th>
+      <th>GAU</th>
+      <th>GAC</th>
+      <th>GAA</th>
+      <th>GAG</th>
+      <th>UAA</th>
+      <th>UAG</th>
+      <th>UGA</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1830</th>
+      <td>0.02869</td>
+      <td>0.01967</td>
+      <td>0.01742</td>
+      <td>0.01527</td>
+      <td>0.02859</td>
+      <td>0.01312</td>
+      <td>0.01199</td>
+      <td>0.00932</td>
+      <td>0.02664</td>
+      <td>0.01178</td>
+      <td>...</td>
+      <td>0.00113</td>
+      <td>0.01445</td>
+      <td>0.00451</td>
+      <td>0.03043</td>
+      <td>0.02244</td>
+      <td>0.02613</td>
+      <td>0.02152</td>
+      <td>0.00092</td>
+      <td>0.00000</td>
+      <td>0.00020</td>
+    </tr>
+    <tr>
+      <th>2592</th>
+      <td>0.00948</td>
+      <td>0.02212</td>
+      <td>0.00316</td>
+      <td>0.01422</td>
+      <td>0.00790</td>
+      <td>0.01106</td>
+      <td>0.00790</td>
+      <td>0.02291</td>
+      <td>0.01106</td>
+      <td>0.02212</td>
+      <td>...</td>
+      <td>0.00316</td>
+      <td>0.01422</td>
+      <td>0.00790</td>
+      <td>0.00711</td>
+      <td>0.02765</td>
+      <td>0.01896</td>
+      <td>0.02291</td>
+      <td>0.00079</td>
+      <td>0.00000</td>
+      <td>0.00000</td>
+    </tr>
+    <tr>
+      <th>1004</th>
+      <td>0.01659</td>
+      <td>0.02461</td>
+      <td>0.01495</td>
+      <td>0.00981</td>
+      <td>0.01207</td>
+      <td>0.01433</td>
+      <td>0.01130</td>
+      <td>0.00940</td>
+      <td>0.01644</td>
+      <td>0.02250</td>
+      <td>...</td>
+      <td>0.00817</td>
+      <td>0.01521</td>
+      <td>0.01433</td>
+      <td>0.02666</td>
+      <td>0.02214</td>
+      <td>0.02764</td>
+      <td>0.01741</td>
+      <td>0.00319</td>
+      <td>0.00108</td>
+      <td>0.00057</td>
+    </tr>
+  </tbody>
+</table>
+<p>3 rows × 64 columns</p>
+</div>
+</div>
+</div>
+<ul>
+<li><strong>Separating the non codon into dataframe</strong></li>
+</ul>
+<div class="cell" data-execution_count="135">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>non_codon <span class="op">=</span> codon.drop(columns<span class="op">=</span>codon.columns[<span class="dv">5</span>:], axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>non_codon.head(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="135">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Kingdom</th>
+      <th>DNAtype</th>
+      <th>SpeciesID</th>
+      <th>Ncodons</th>
+      <th>SpeciesName</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>virus</td>
+      <td>0</td>
+      <td>100217</td>
+      <td>1995</td>
+      <td>Epizootic haematopoietic necrosis virus</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>virus</td>
+      <td>0</td>
+      <td>100220</td>
+      <td>1474</td>
+      <td>Bohle iridovirus</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>virus</td>
+      <td>0</td>
+      <td>100755</td>
+      <td>4862</td>
+      <td>Sweet potato leaf curl virus</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<section id="visualising-non_codon" class="level3">
+<h3 class="anchored" data-anchor-id="visualising-non_codon">Visualising non_codon</h3>
+<ul>
+<li><p>What is the distribution of the target classes for Kingdom?</p></li>
+<li><p>What is the distribution of the target classes for DNAtype?</p></li>
+</ul>
+<p>I will not be looking at <code>SepciesID</code> or <code>SpeciesName</code> as these columns won’t have a distribution that offers any noteworthy insights.</p>
+<div class="cell" data-execution_count="136">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> col <span class="kw">in</span> non_codon[[<span class="st">'Kingdom'</span>, <span class="st">'DNAtype'</span>, <span class="st">'Ncodons'</span>]]:</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    plt.figure()</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    plt.title(<span class="ss">f'Feature: </span><span class="sc">{</span>col<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    plt.hist(codon[col], bins<span class="op">=</span><span class="dv">20</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="03-Exploratory-Data-Analysis_files/figure-html/cell-10-output-1.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="03-Exploratory-Data-Analysis_files/figure-html/cell-10-output-2.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="03-Exploratory-Data-Analysis_files/figure-html/cell-10-output-3.png" class="img-fluid"></p>
+</div>
+</div>
+<ul>
+<li><code>Kingdom</code> shows the counts of the different kingdom, with bacterial and viral being the ones with the most data points in this dataset.</li>
+<li><code>DNAtype</code> has 12 unique values, however there only seems to show 0, 1, and 2. I will have to apply a log to this graph to see the counts of the other dna types and they could be muted by the high counts from the top three.</li>
+<li><code>Ncodons</code> another distribution that is heavily skewed, I will visualise this one with a log transformation.</li>
+</ul>
+<div class="cell" data-execution_count="137">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Looking at the Kingdom column distribution using log transformation:</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>non_codon[<span class="st">'Kingdom'</span>].value_counts().plot(kind<span class="op">=</span><span class="st">'bar'</span>, log<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Kingdom Column Distribution'</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Kingdoms'</span>)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Log Counts'</span>)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Proportions of the Kingdom counts:</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>non_codon[<span class="st">'Kingdom'</span>].value_counts(normalize<span class="op">=</span><span class="va">True</span>)<span class="op">*</span><span class="dv">100</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="137">
+<pre><code>bacteria        22.413264
+virus           21.737796
+plant           19.365981
+vertebrate      15.942585
+invertebrate    10.323918
+mammal           4.390543
+phage            1.688671
+rodent           1.650292
+primate          1.381640
+archaea          0.967148
+plasmid          0.138164
+Name: Kingdom, dtype: float64</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="03-Exploratory-Data-Analysis_files/figure-html/cell-11-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+<p>The dataset does contain rows for kingdoms beside the top three, however there is a high imbalance here. with some of the classes having less than 5%. I will drop <code>plm</code> since it is &lt;2% (18 entries).</p>
+<div class="cell" data-execution_count="138">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Looking at DNAtype column distribution with log transformation:</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>non_codon[<span class="st">'DNAtype'</span>].value_counts().plot(kind<span class="op">=</span><span class="st">'bar'</span>, log<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'DNAtype column distribution'</span>)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'DNA Type'</span>)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Log Counts'</span>)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Proportions of DNAtype counts'</span>)</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Proportions of the DNAtype counts:</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>non_codon[<span class="st">'DNAtype'</span>].value_counts(normalize<span class="op">=</span><span class="va">True</span>)<span class="op">*</span><span class="dv">100</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Proportions of DNAtype counts</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="138">
+<pre><code>0     71.131409
+1     22.252072
+2      6.263433
+4      0.237949
+12     0.038379
+3      0.015352
+9      0.015352
+5      0.015352
+11     0.015352
+6      0.007676
+7      0.007676
+Name: DNAtype, dtype: float64</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="03-Exploratory-Data-Analysis_files/figure-html/cell-12-output-3.png" class="img-fluid"></p>
+</div>
+</div>
+<ul>
+<li><strong>Thoughts</strong>:</li>
+</ul>
+<p>The columns <code>Kingdoms</code> and <code>DNAtype</code> will be the targets (separately) that I will be aiming to classify. Looking at the distributions, and the imbalances between the classes I will aim to drop some classes and the following is my reasoning.</p>
+<p>In terms of kingdoms, the Dataset contains the following: - pri: primate - rod: rodent - mam: mammalian - vrt: vertebrate - inv: invertebrate - pln: plant - bct: bacteria - vrl: virus - phg :bacteriophage - arc: archaea - plm: plasmid</p>
+<p>primate ,rodent, and mammalian can be grouped and renamed under the vertebrate kingdom, because they are vertebrates and are all mammals - vrt = vrt + pri + rod + mam</p>
+<p>The column will then have the following classes: - vrt: vertebrate - inv: invertebrate - pln: plant - bct: bacteria - vrl: virus - phg :bacteriophage - arc: archaea - plm: plasmid</p>
+<p>I will further disregard the rows that are class plm, as there are far too little entries (18 only).</p>
+<p>Final classes will be:</p>
+<ul>
+<li>vrt: vertebrate</li>
+<li>inv: invertebrate</li>
+<li>pln: plant</li>
+<li>bct: bacteria</li>
+<li>vrl: virus</li>
+<li>phg :bacteriophage</li>
+<li>arc: archaea</li>
+</ul>
+<p>Finally I will look at the distribution after these changes.</p>
+<p>For the column <code>DNAtype</code>, it contains the following classes: - 0: nuclear - 1: mitochondrion - 2: chloroplast - 3: cyanelle - 4: plastid - 5: nucleomorph - 6: secondary endosymbiont - 7: chromoplast - 8: leukoplast - 9: NA - 10: proplastid - 11: apicoplast - 12: kinetoplast</p>
+<p>As seen in the <code>DNAtype</code> distribution, there is a high imbalance between these classes. I will focus here on the top three which are 0 (nuclear), 1 (mitochonrion), and 2(chloroplast). These three DNA types that are present in all of the kingdoms in our dataset, so I will go ahead with these as they are representative. I will drop all rows that do not contain 0, 1, or 2, as the are less than 1% of the dataset.</p>
+<ul>
+<li><strong>Kingdom Column</strong></li>
+</ul>
+<div class="cell" data-execution_count="139">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># changing the value names as stated above:</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>non_codon <span class="op">=</span> non_codon.replace([<span class="st">'primate'</span>, <span class="st">'rodend'</span>, <span class="st">'mammal'</span>], <span class="st">'vertebrate'</span>)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># dropping rows with value plm</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>non_codon <span class="op">=</span> non_codon.drop(</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    non_codon.loc[non_codon[<span class="st">'Kingdom'</span>] <span class="op">==</span> <span class="st">'plasmid'</span>].index)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="140">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>non_codon[<span class="st">'Kingdom'</span>].value_counts().plot(</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    kind<span class="op">=</span><span class="st">'bar'</span>, log<span class="op">=</span><span class="va">True</span>)  <span class="co"># no log applied</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Kingdom Column Distribution'</span>)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Kingdoms'</span>)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Log Counts'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="140">
+<pre><code>Text(0, 0.5, 'Log Counts')</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="03-Exploratory-Data-Analysis_files/figure-html/cell-14-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="141">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>non_codon[<span class="st">'Kingdom'</span>].value_counts()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="141">
+<pre><code>bacteria        2920
+virus           2832
+vertebrate      2829
+plant           2523
+invertebrate    1345
+phage            220
+rodent           215
+archaea          126
+Name: Kingdom, dtype: int64</code></pre>
+</div>
+</div>
+<p>As there are still imbalances in the data, this makes sense since genome lengths differ between species, so this imbalance is inevitable. For example for archea there are only 209 species,</p>
+<blockquote class="blockquote">
+<p>Note: these changes have currently been made to the dataframe <code>non_codon</code> I will now apply these changes to the main dataframe <code>codon</code></p>
+</blockquote>
+<div class="cell" data-execution_count="142">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># changing the value names as stated above:</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>codon <span class="op">=</span> codon.replace([<span class="st">'primate'</span>, <span class="st">'rodent'</span>, <span class="st">'mammal'</span>], <span class="st">'vertebrate'</span>)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co"># dropping rows with value plm</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>codon <span class="op">=</span> codon.drop(codon.loc[codon[<span class="st">'Kingdom'</span>] <span class="op">==</span> <span class="st">'plasmid'</span>].index)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li><strong>DNAtype Column</strong></li>
+</ul>
+<div class="cell" data-execution_count="143">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Dropping all rows that do not contain 0, 1, or 2 as DNAtype:</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>non_codon <span class="op">=</span> non_codon.drop(non_codon.loc[non_codon[<span class="st">'DNAtype'</span>] <span class="op">&gt;</span> <span class="dv">2</span>].index)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="144">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Checking distribution:</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>non_codon[<span class="st">'DNAtype'</span>].value_counts().plot(</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    kind<span class="op">=</span><span class="st">'bar'</span>, log<span class="op">=</span><span class="va">True</span>)  <span class="co"># log transformation not applied</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'DNAtype column distribution'</span>)</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'DNA Type'</span>)</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Log Counts'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="144">
+<pre><code>Text(0, 0.5, 'Log Counts')</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="03-Exploratory-Data-Analysis_files/figure-html/cell-18-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+<p>The classes are highly imbalanced, but this can be adjusted later on during the modeling section.</p>
+<p>Again, I will apply these changes to the original <code>codon</code> dataframe for consistency.</p>
+<div class="cell" data-execution_count="145">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Dropping rows in DNAtype with values larger than 2:</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>codon <span class="op">=</span> codon.drop(codon.loc[codon[<span class="st">'DNAtype'</span>] <span class="op">&gt;</span> <span class="dv">2</span>].index)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="146">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Checking distribution in codon dataframe:</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>codon[<span class="st">'DNAtype'</span>].value_counts().plot(kind<span class="op">=</span><span class="st">'bar'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="146">
+<pre><code>&lt;AxesSubplot:&gt;</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="03-Exploratory-Data-Analysis_files/figure-html/cell-20-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+<ul>
+<li>What does the distribution for the Ncodons column look like?</li>
+</ul>
+<div class="cell" data-execution_count="147">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># checking log transformed distribution</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>plt.hist(non_codon[<span class="st">'Ncodons'</span>], bins<span class="op">=</span><span class="dv">100</span>)</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'==============================================='</span>)</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>non_codon[<span class="st">'Ncodons'</span>] <span class="op">=</span> np.log(non_codon[<span class="st">'Ncodons'</span>]<span class="op">+</span><span class="dv">1</span>)</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>non_codon[<span class="st">'Ncodons'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="03-Exploratory-Data-Analysis_files/figure-html/cell-21-output-1.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>===============================================</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="147">
+<pre><code>0         7.598900
+1         7.296413
+2         8.489411
+3         7.557995
+4        10.035918
+           ...    
+13023     7.001246
+13024     7.634337
+13025     7.430707
+13026    17.520819
+13027    16.012624
+Name: Ncodons, Length: 12964, dtype: float64</code></pre>
+</div>
+</div>
+<p><code>Ncodons</code> is highly skewed, this is because there are more species with smaller genomes and so smaller number of codons in the sequence.</p>
+<p>Applying the log transformation change to the original dataframe <code>codon</code></p>
+<div class="cell" data-execution_count="148">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>codon[<span class="st">'Ncodons'</span>] <span class="op">=</span> np.log(codon[<span class="st">'Ncodons'</span>]<span class="op">+</span><span class="dv">1</span>)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>codon[<span class="st">'Ncodons'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="148">
+<pre><code>0         7.598900
+1         7.296413
+2         8.489411
+3         7.557995
+4        10.035918
+           ...    
+13023     7.001246
+13024     7.634337
+13025     7.430707
+13026    17.520819
+13027    16.012624
+Name: Ncodons, Length: 12964, dtype: float64</code></pre>
+</div>
+</div>
+<p>Finally, the dataframe shape after transformation.</p>
+<div class="cell" data-execution_count="149">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># the dataframe containing only the non_codon columns</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f'The non_codon dataframe contains </span><span class="sc">{</span>non_codon<span class="sc">.</span>shape[<span class="dv">0</span>]<span class="sc">}</span><span class="ss"> rows and </span><span class="sc">{</span>non_codon<span class="sc">.</span>shape[<span class="dv">1</span>]<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="co"># the original codon dataframe</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f'The codon dataframe contains </span><span class="sc">{</span>codon<span class="sc">.</span>shape[<span class="dv">0</span>]<span class="sc">}</span><span class="ss"> rows and </span><span class="sc">{</span>codon<span class="sc">.</span>shape[<span class="dv">1</span>]<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>The non_codon dataframe contains 12964 rows and 5
+The codon dataframe contains 12964 rows and 69</code></pre>
+</div>
+</div>
+<hr>
+</section>
+<section id="visualising-non_codon-1" class="level3">
+<h3 class="anchored" data-anchor-id="visualising-non_codon-1">Visualising non_codon</h3>
+<div class="cell" data-execution_count="150">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>justcodon.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="150">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>UUU</th>
+      <th>UUC</th>
+      <th>UUA</th>
+      <th>UUG</th>
+      <th>CUU</th>
+      <th>CUC</th>
+      <th>CUA</th>
+      <th>CUG</th>
+      <th>AUU</th>
+      <th>AUC</th>
+      <th>...</th>
+      <th>CGG</th>
+      <th>AGA</th>
+      <th>AGG</th>
+      <th>GAU</th>
+      <th>GAC</th>
+      <th>GAA</th>
+      <th>GAG</th>
+      <th>UAA</th>
+      <th>UAG</th>
+      <th>UGA</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>13028.000000</td>
+      <td>13028.000000</td>
+      <td>13028.000000</td>
+      <td>13028.000000</td>
+      <td>13028.000000</td>
+      <td>13028.000000</td>
+      <td>13028.000000</td>
+      <td>13028.000000</td>
+      <td>13028.000000</td>
+      <td>13028.000000</td>
+      <td>...</td>
+      <td>13028.000000</td>
+      <td>13028.000000</td>
+      <td>13028.000000</td>
+      <td>13028.000000</td>
+      <td>13028.000000</td>
+      <td>13028.000000</td>
+      <td>13028.000000</td>
+      <td>13028.000000</td>
+      <td>13028.000000</td>
+      <td>13028.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>0.024819</td>
+      <td>0.023440</td>
+      <td>0.020635</td>
+      <td>0.014104</td>
+      <td>0.017822</td>
+      <td>0.018286</td>
+      <td>0.019043</td>
+      <td>0.018455</td>
+      <td>0.028354</td>
+      <td>0.025036</td>
+      <td>...</td>
+      <td>0.005452</td>
+      <td>0.009929</td>
+      <td>0.006422</td>
+      <td>0.024183</td>
+      <td>0.021164</td>
+      <td>0.028292</td>
+      <td>0.021683</td>
+      <td>0.001640</td>
+      <td>0.000590</td>
+      <td>0.006178</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>0.017627</td>
+      <td>0.011597</td>
+      <td>0.020709</td>
+      <td>0.009279</td>
+      <td>0.010587</td>
+      <td>0.014572</td>
+      <td>0.024251</td>
+      <td>0.016583</td>
+      <td>0.017505</td>
+      <td>0.014595</td>
+      <td>...</td>
+      <td>0.006601</td>
+      <td>0.008574</td>
+      <td>0.006387</td>
+      <td>0.013826</td>
+      <td>0.013038</td>
+      <td>0.014343</td>
+      <td>0.015018</td>
+      <td>0.001785</td>
+      <td>0.000882</td>
+      <td>0.010344</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>...</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>0.013910</td>
+      <td>0.015380</td>
+      <td>0.005610</td>
+      <td>0.007108</td>
+      <td>0.010890</td>
+      <td>0.007830</td>
+      <td>0.005300</td>
+      <td>0.007180</td>
+      <td>0.016370</td>
+      <td>0.015130</td>
+      <td>...</td>
+      <td>0.001220</td>
+      <td>0.001690</td>
+      <td>0.001168</td>
+      <td>0.012390</td>
+      <td>0.011860</td>
+      <td>0.017360</td>
+      <td>0.009710</td>
+      <td>0.000560</td>
+      <td>0.000000</td>
+      <td>0.000410</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>0.021750</td>
+      <td>0.021905</td>
+      <td>0.015260</td>
+      <td>0.013360</td>
+      <td>0.016130</td>
+      <td>0.014560</td>
+      <td>0.009680</td>
+      <td>0.012800</td>
+      <td>0.025480</td>
+      <td>0.021540</td>
+      <td>...</td>
+      <td>0.003530</td>
+      <td>0.009270</td>
+      <td>0.004540</td>
+      <td>0.025435</td>
+      <td>0.019070</td>
+      <td>0.026085</td>
+      <td>0.020540</td>
+      <td>0.001380</td>
+      <td>0.000420</td>
+      <td>0.001130</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>0.031310</td>
+      <td>0.029210</td>
+      <td>0.029485</td>
+      <td>0.019803</td>
+      <td>0.022730</td>
+      <td>0.025110</td>
+      <td>0.017245</td>
+      <td>0.024330</td>
+      <td>0.038113</td>
+      <td>0.031860</td>
+      <td>...</td>
+      <td>0.007150</td>
+      <td>0.015922</td>
+      <td>0.010250</td>
+      <td>0.034190</td>
+      <td>0.027690</td>
+      <td>0.036800</td>
+      <td>0.031122</td>
+      <td>0.002370</td>
+      <td>0.000830</td>
+      <td>0.002890</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>0.217300</td>
+      <td>0.091690</td>
+      <td>0.151330</td>
+      <td>0.101190</td>
+      <td>0.089780</td>
+      <td>0.100350</td>
+      <td>0.163920</td>
+      <td>0.107370</td>
+      <td>0.154060</td>
+      <td>0.088600</td>
+      <td>...</td>
+      <td>0.055540</td>
+      <td>0.098830</td>
+      <td>0.058430</td>
+      <td>0.185660</td>
+      <td>0.113840</td>
+      <td>0.144890</td>
+      <td>0.158550</td>
+      <td>0.045200</td>
+      <td>0.025610</td>
+      <td>0.106700</td>
+    </tr>
+  </tbody>
+</table>
+<p>8 rows × 64 columns</p>
+</div>
+</div>
+</div>
+<p>The <code>justcodon</code> dataframe created from the original <code>codon</code> dataframe contains all the codon columns which are 64 columns in total, each column representing one of the 64 codons.</p>
+<p>The values in these columns are frequencies of the codon occurrence in each organism’s genome (from nuclear, mitochondrial, or chloroplast RNA)</p>
+<p>The frequencies are caculated by taking a count of the total number of codons in the sequenced genome, counting the individual codon occurance, and then dividing this number by the total number of codons.</p>
+<p>for example : for <code>Enterobacteria phage P1</code>, the total number of codons is 71879, and the number of UGU occurances is 362, so the codon frequency is 0.00503.</p>
+<ul>
+<li><h4 id="codon-columns-distributions" class="anchored">Codon columns distributions:</h4></li>
+</ul>
+<div class="cell" data-execution_count="151">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">30</span>, <span class="dv">10</span>))</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>sns.boxplot(data<span class="op">=</span>justcodon, palette<span class="op">=</span><span class="st">'Blues'</span>)</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Codon Distributions'</span>)</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>plt.axhline(y<span class="op">=</span>justcodon.median().mean(), color<span class="op">=</span><span class="st">'r'</span>)</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Codons'</span>)</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="03-Exploratory-Data-Analysis_files/figure-html/cell-25-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<p><strong>A few observations</strong> - The stop codons <code>UAA</code>, <code>UAG</code> <code>UGA</code> have the lowest occurance, this makes sense since stop codons are what tells the translation machinery when to stop translation, so they will not be as frequent in the RNA/DNA sequence as the rest of the codons.</p>
+<ul>
+<li><p>The start codon <code>AUG</code> occurance is quite similar accross all species as the distribution is tending towards the median.</p>
+<ul>
+<li><code>UUU</code> <code>UUC</code>:</li>
+</ul></li>
+<li><p>These codons encode for the amino acid Phenylalanine. As this amino acid only has two codons that can encode for it, the distributions have a similar median, but <code>UUU</code> has slightly more recorded occurances among the different species.</p>
+<ul>
+<li><code>AUU</code> <code>AUC</code> <code>AUA</code>:</li>
+</ul></li>
+<li><p>These three codons encode for the amino acid Isoleucine. From the distributions <code>AUU</code> and <code>AUC</code> has higher occurances in the species. So they tend to be the ones found most among species to encode for the amino acid, with <code>AUU</code> having a higher median so it is even more favoured over <code>AUC</code>.</p>
+<ul>
+<li><code>ACU</code> <code>ACC</code> <code>ACA</code> <code>ACG</code></li>
+</ul></li>
+<li><p>These encode for the amino acid Theronine. The distributions show that <code>ACC</code> and <code>ACA</code> have a wider range of occurances among the species while <code>ACU</code> codon appears to be the higher occuring one for this amino acid.</p>
+<ul>
+<li><code>CAA</code> <code>CAG</code></li>
+</ul></li>
+<li><p>These codons encode for the amino acid Glutamine. From the distributions it is apparent that <code>CAA</code> is more frequent in its occurance among species.</p>
+<ul>
+<li><code>AAU</code> <code>AAC</code></li>
+</ul></li>
+<li><p>These codons encode for the amino acid Asparagine. Seeing that this amino acid only has two type of codons that can encode it, the distributions show a similar median for both however <code>AAC</code> tends to be favoured.</p></li>
+</ul>
+<p>These frequencies are highly dependent on the size of the sequence, DNA length that was sequenced. Therefore, it is important to view their distributions in relation to either DNA type or Kingdom.</p>
+<hr>
+</section>
+</section>
+<section id="bivariate-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="bivariate-analysis">Bivariate Analysis</h2>
+<section id="kingdom-classes" class="level3">
+<h3 class="anchored" data-anchor-id="kingdom-classes">Kingdom classes:</h3>
+<ul>
+<li>Are there codons that have a higher occurence in certain Kingdoms?</li>
+</ul>
+<div class="cell" data-execution_count="152">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>clustergraph_kingdom <span class="op">=</span> codon.drop(</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>    columns<span class="op">=</span>[<span class="st">'DNAtype'</span>, <span class="st">'SpeciesID'</span>, <span class="st">'Ncodons'</span>, <span class="st">'SpeciesName'</span>], axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>clustergraph_kingdom.set_index(<span class="st">'Kingdom'</span>, inplace<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="153">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> px.imshow(clustergraph_kingdom.groupby(level<span class="op">=</span><span class="st">'Kingdom'</span>).mean(</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>),  color_continuous_scale<span class="op">=</span><span class="st">'Cividis'</span>, origin<span class="op">=</span><span class="st">'lower'</span>)  <span class="co"># or RdBu_r</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>fig.update_layout()</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>fig.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<pre><code>Unable to display output for mime type(s): application/vnd.plotly.v1+json</code></pre>
+</div>
+</div>
+<p>From the heatmap it appears that <code>CUA</code> has a high occurance in the vertebrate kingdom. furthermore the Aspartic Acid (<code>GAU</code> and <code>GAC</code>) and Glutamic Acid (<code>GAA</code> and <code>GAG</code>) codons seem to have high occurances in all of the kingdoms but not as much in the vertebrate kingdom in comparison with the rest.</p>
+<p><code>CAG</code> has a higher occurance for archea kingdom.</p>
+<p><code>CUA</code> is highly favoured in vertebrates, this codon encodes for Leucine.</p>
+</section>
+<section id="dnatype-classes" class="level3">
+<h3 class="anchored" data-anchor-id="dnatype-classes">DNAtype classes:</h3>
+<ul>
+<li>Are there codons that have a higher occurance in certain DNA types?</li>
+</ul>
+<div class="cell" data-execution_count="154">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>clustergraph_dna <span class="op">=</span> codon.drop(</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>    columns<span class="op">=</span>[<span class="st">'Kingdom'</span>, <span class="st">'SpeciesID'</span>, <span class="st">'Ncodons'</span>, <span class="st">'SpeciesName'</span>], axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>clustergraph_dna.set_index(<span class="st">'DNAtype'</span>, inplace<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="155">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> px.imshow(clustergraph_dna.groupby(level<span class="op">=</span><span class="st">'DNAtype'</span>).mean(),</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>                color_continuous_scale<span class="op">=</span><span class="st">'Cividis'</span>, origin<span class="op">=</span><span class="st">'lower'</span>)  <span class="co"># or RdBu_r</span></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>fig.update_layout()</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>fig.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<pre><code>Unable to display output for mime type(s): application/vnd.plotly.v1+json</code></pre>
+</div>
+</div>
+<p>In the heatmap for DNAtype codon frequencies, there are some codons that have frequencies. It appears that for DNAtype 1 which is mitochondria, there is a higher frequency of <code>CUA</code> which codes for the amino acid Leucine. While for Nuclear DNA there is almost an avoidance of the <code>CUA</code> codon. Moreover, in terms of the stop codons, it appears that mitochondrial DNA (1) seems to favour <code>UGA</code> stop codon over the over two.</p>
+<p>Another noteworthy pattern, mitochondrial DNA shows obvious order of favouring for the Theronine amino acid encoding codons; <code>ACG</code>, <code>ACA</code>, <code>ACC</code>, and <code>ACU</code>. There is a higher occurance of <code>ACA</code> for this amino acid.</p>
+<p>Nuclear DNA (0) seems to have a different pattern, in terms of frequency there are obvious codons that are more occurent for amino acids, however it isn’t as pronounced.</p>
+<hr>
+</section>
+</section>
+<section id="saving-data" class="level1">
+<h1>Saving data</h1>
+<div class="cell" data-execution_count="156">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>codon[<span class="st">'Kingdom'</span>].unique()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="156">
+<pre><code>array(['virus', 'archaea', 'bacteria', 'phage', 'plant', 'invertebrate',
+       'vertebrate'], dtype=object)</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="157">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save data as pickle file to data folder</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>joblib.dump(codon, <span class="st">'../data/codon_after_eda.pkl'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="157">
+<pre><code>['../data/codon_after_eda.pkl']</code></pre>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
