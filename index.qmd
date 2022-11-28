@@ -3,7 +3,8 @@ title: "codon classification project"
 listing:
   contents: posts
   sort: "date asc"
-  type: default
+  type: grid
+  fields: [date, title]
   categories: true
   sort-ui: false
   filter-ui: false
