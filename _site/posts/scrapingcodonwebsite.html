@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.269">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>codon2 – scrapingcodonwebsite</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">codon2</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html">
+ <span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/"><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com"><i class="bi bi-twitter" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+
+<div class="cell" data-execution_count="310">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Standard imports</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># For web scraping</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> bs4 <span class="im">import</span> BeautifulSoup</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># For performing regex operations</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># For adding delays so that we don't spam requests</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> codon_scrape(url):</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> first_layer_url(url):</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        response <span class="op">=</span> requests.get(url)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        soup <span class="op">=</span> BeautifulSoup(response.content)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        project_href <span class="op">=</span> [i[<span class="st">'href'</span>] <span class="cf">for</span> i <span class="kw">in</span> soup.find_all(<span class="st">'a'</span>, href<span class="op">=</span><span class="va">True</span>)]</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        r <span class="op">=</span> re.<span class="bu">compile</span>(<span class="st">'codon\/[a-zA-Z]+.html'</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        filtered_href <span class="op">=</span> <span class="bu">list</span>(<span class="bu">filter</span>(r.search, project_href))</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>        filtered_href <span class="op">=</span> [<span class="st">'https://www.kazusa.or.jp'</span><span class="op">+</span>i <span class="cf">for</span> i <span class="kw">in</span> filtered_href] <span class="co">#now I have a list of the urls containing each of the letters/mito and chloro</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> second_layer_url(filtered_href):</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> firsturls: <span class="co">#this should go through each organism url</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>            response1 <span class="op">=</span> requests.get(i)</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>            soup1 <span class="op">=</span> BeautifulSoup(response1.content)</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>            project_href1 <span class="op">=</span> [i[<span class="st">'href'</span>] <span class="cf">for</span> i <span class="kw">in</span> soup1.find_all(<span class="st">'a'</span>, href<span class="op">=</span><span class="va">True</span>)]</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>            r <span class="op">=</span> re.<span class="bu">compile</span>(<span class="st">'ccodon\/cgi\-bin\/showcodon\.cgi\?species=\d{1,10}'</span>)</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>            filtered_href1 <span class="op">=</span> <span class="bu">list</span>(<span class="bu">filter</span>(r.search, project_href1))</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>            filtered_href1.append([<span class="st">'https://www.kazusa.or.jp'</span><span class="op">+</span>i <span class="cf">for</span> i <span class="kw">in</span> filtered_href1])</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> third_layer_data(filtered_href1):<span class="co">#this function should extract the codons and their frequencies from each organism url and assign it to a variable?</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>         </span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>         </span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>         <span class="cf">for</span> i <span class="kw">in</span> filtered_href1:</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>            response2 <span class="op">=</span> requests.get(i)</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>            soup2 <span class="op">=</span> BeautifulSoup(response2.content)</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>            codonpage <span class="op">=</span> soup.find(<span class="st">"strong"</span>).find(text<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>            data <span class="op">=</span> []</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> info <span class="kw">in</span> codonpage:</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>                item <span class="op">=</span> {}</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>                item[<span class="st">'species_name'</span>] <span class="op">=</span> <span class="bu">str</span>(codonpage).split(<span class="st">'&lt;i&gt;'</span>)[<span class="dv">1</span>].split(<span class="st">'&lt;/i&gt;'</span>)[<span class="dv">0</span>]</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>                item[<span class="st">'nr_of_codons'</span>] <span class="op">=</span> <span class="bu">str</span>(codonpage).split(<span class="st">' ('</span>)[<span class="dv">1</span>].split(<span class="st">')&lt;/str'</span>)[<span class="dv">0</span>]</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>                item[<span class="st">'kingdom'</span>] <span class="op">=</span> <span class="bu">str</span>(codonpage).split(<span class="st">'&gt;[gb'</span>)[<span class="dv">1</span>].split(<span class="st">']: '</span>)[<span class="dv">0</span>]            </span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>website has three levels</p>
+<p>first level selecting alphabet url second level selecting organism name url thrid level codons data</p>
+<p>okay so function that goes through first layer and finds urls puts them in a list another function goes through second layer urls and extraxts them into a list thrid goes through the urls and extracts the data into a csv file?</p>
+<p>project_href = [i[‘href’] for i in soup.find_all(‘a’, href=True)]</p>
+<div class="cell" data-execution_count="311">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save the URL of the webpage we want to scrape to a variable</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">'https://www.kazusa.or.jp/codon/cgi-bin/showcodon.cgi?species=100'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="312">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Send a get request and assign the response to a variable</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> requests.get(url)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="313">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Turn the undecoded content into a Beautiful Soup object and assign it to a variable</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>soup <span class="op">=</span> BeautifulSoup(response.content)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="314">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(soup.prettify())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;html&gt;
+ &lt;head&gt;
+  &lt;meta content="text/html; charset=utf-8" http-equiv="Content-Type"/&gt;
+  &lt;title&gt;
+   Codon usage table
+  &lt;/title&gt;
+ &lt;/head&gt;
+ &lt;body bgcolor="#F0F0F0"&gt;
+  &lt;strong&gt;
+   &lt;i&gt;
+    Ancylobacter aquaticus
+   &lt;/i&gt;
+   [gbbct]: 4 CDS's (1108 codons)
+  &lt;/strong&gt;
+  &lt;hr align="LEFT" size="1"/&gt;
+  fields: [triplet] [frequency:
+  &lt;strong&gt;
+   per thousand
+  &lt;/strong&gt;
+  ] ([number])
+  &lt;hr align="LEFT" size="1"/&gt;
+  &lt;pre&gt;
+UUU  2.7(     3)  UCU  0.9(     1)  UAU 16.2(    18)  UGU  0.0(     0)
+UUC 20.8(    23)  UCC 19.0(    21)  UAC  9.9(    11)  UGC  9.9(    11)
+UUA  0.0(     0)  UCA  2.7(     3)  UAA  0.0(     0)  UGA  2.7(     3)
+UUG  3.6(     4)  UCG 19.9(    22)  UAG  0.9(     1)  UGG  9.9(    11)
+
+CUU  6.3(     7)  CCU  1.8(     2)  CAU 13.5(    15)  CGU 15.3(    17)
+CUC 39.7(    44)  CCC 16.2(    18)  CAC 13.5(    15)  CGC 39.7(    44)
+CUA  0.0(     0)  CCA  0.9(     1)  CAA  0.9(     1)  CGA  0.9(     1)
+CUG 37.9(    42)  CCG 34.3(    38)  CAG 27.1(    30)  CGG 16.2(    18)
+
+AUU  6.3(     7)  ACU  2.7(     3)  AAU  3.6(     4)  AGU  0.9(     1)
+AUC 26.2(    29)  ACC 40.6(    45)  AAC 20.8(    23)  AGC 15.3(    17)
+AUA  0.9(     1)  ACA  0.9(     1)  AAA  2.7(     3)  AGA  0.0(     0)
+AUG 17.1(    19)  ACG 26.2(    29)  AAG 43.3(    48)  AGG  2.7(     3)
+
+GUU  9.0(    10)  GCU  9.9(    11)  GAU 18.1(    20)  GGU  6.3(     7)
+GUC 36.1(    40)  GCC 70.4(    78)  GAC 35.2(    39)  GGC 53.2(    59)
+GUA  1.8(     2)  GCA  8.1(     9)  GAA 26.2(    29)  GGA  8.1(     9)
+GUG 26.2(    29)  GCG 51.4(    57)  GAG 37.9(    42)  GGG  8.1(     9)
+&lt;/pre&gt;
+  &lt;hr align="LEFT" size="1"/&gt;
+  Coding GC 66.52%
+1st letter GC 67.06%
+2nd letter GC 49.55%
+3rd letter GC 82.94%
+  &lt;br/&gt;
+  &lt;hr align="LEFT" size="1"/&gt;
+  &lt;form action="./showcodon.cgi" method="GET"&gt;
+   &lt;strong&gt;
+    Format:
+   &lt;/strong&gt;
+   &lt;br/&gt;
+   &lt;!-- INPUT TYPE="HIDDEN" NAME="species" VALUE="Ancylobacter aquaticus [gbbct]" --&gt;
+   &lt;input name="species" type="HIDDEN" value="100"/&gt;
+   &lt;select name="aa"&gt;
+    &lt;option selected=""&gt;
+     SELECT A CODE
+     &lt;option value="1"&gt;
+      1: Standard
+      &lt;option value="2"&gt;
+       2: Vertebrate Mitochondrial
+       &lt;option value="3"&gt;
+        3: Yeast Mitochondrial
+        &lt;option value="4"&gt;
+         4: Mold, Protozoan, Coelenterate Mitochondrial
+         &lt;option value="4"&gt;
+          (4:)  and Mycoplasma/Spiroplasma
+          &lt;option value="5"&gt;
+           5: Invertebrate Mitochondrial
+           &lt;option value="6"&gt;
+            6: Ciliate Macronuclear and Dasycladacean
+            &lt;option value="9"&gt;
+             9: Echinoderm Mitochondrial
+             &lt;option value="10"&gt;
+              10: Alternative Ciliate Macronuclear
+              &lt;option value="11"&gt;
+               11: Eubacterial
+               &lt;option value="12"&gt;
+                12: Alternative Yeast
+                &lt;option value="13"&gt;
+                 13: Ascidian Mitochondrial
+                 &lt;option value="14"&gt;
+                  14: Flatworm Mitochondrial
+                  &lt;option value="15"&gt;
+                   15: Blepharisma Nuclear Code
+                  &lt;/option&gt;
+                 &lt;/option&gt;
+                &lt;/option&gt;
+               &lt;/option&gt;
+              &lt;/option&gt;
+             &lt;/option&gt;
+            &lt;/option&gt;
+           &lt;/option&gt;
+          &lt;/option&gt;
+         &lt;/option&gt;
+        &lt;/option&gt;
+       &lt;/option&gt;
+      &lt;/option&gt;
+     &lt;/option&gt;
+    &lt;/option&gt;
+   &lt;/select&gt;
+   &lt;a href="http://www3.ncbi.nlm.nih.gov/htbin-post/Taxonomy/wprintgc?mode=t"&gt;
+    Genetic codes (NCBI)
+   &lt;/a&gt;
+   &lt;br/&gt;
+   &lt;input checked="" name="style" type="radio" value="N"/&gt;
+   &lt;!-- INPUT TYPE="hidden" NAME="style" VALUE="N" --&gt;
+   Codon Usage Table with Amino Acids
+   &lt;br/&gt;
+   &lt;input name="style" type="radio" value="GCG"/&gt;
+   A style like CodonFrequency output in GCG
+   &lt;a href="http://www.gcg.com/products/software.html"&gt;
+    Wisconsin Package
+    &lt;sup&gt;
+     TM
+    &lt;/sup&gt;
+   &lt;/a&gt;
+   &lt;br/&gt;
+   &lt;!-- INPUT TYPE="radio" NAME="style" VALUE="BT")Back translation (comming soon)
+(BR)
+(TEXTAREA NAME="aa_src" ROWS="2" COLS="60")(/TEXTAREA)
+(P --&gt;
+   &lt;input type="SUBMIT" value="Submit"/&gt;
+  &lt;/form&gt;
+  &lt;hr align="LEFT" size="1"/&gt;
+  &lt;form action="srchcds.cgi" method="POST"&gt;
+   &lt;strong&gt;
+    CDS Search:
+   &lt;/strong&gt;
+   &lt;br/&gt;
+   &lt;input name="key" size="40" type="TEXT"/&gt;
+   &lt;input type="SUBMIT" value="Submit"/&gt;
+   &lt;input name="abbrev" type="HIDDEN" value="100"/&gt;
+   &lt;input name="entry" type="HIDDEN" value="bct"/&gt;
+   &lt;input name="sponly" type="HIDDEN" value="Ancylobacter aquaticus"/&gt;
+   &lt;br/&gt;
+   Keyword example: ribosomal protein / MAP kinase
+  &lt;/form&gt;
+  &lt;!-- A HREF="ftp://ftp.kazusa.or.jp/pub/codon/current/species/100.bct" --&gt;
+  &lt;a href="http://www.kazusa.or.jp/codon/current/species/100"&gt;
+   List of codon usage for each CDS
+  &lt;/a&gt;
+  &lt;a href="http://www.kazusa.or.jp/codon/current/CODON_LABEL"&gt;
+   (format)
+  &lt;/a&gt;
+  &lt;hr align="LEFT" size="1"/&gt;
+  &lt;i&gt;
+   &lt;a href="/codon/"&gt;
+    Homepage
+   &lt;/a&gt;
+  &lt;/i&gt;
+ &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="315">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>soup.title.text</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="315">
+<pre><code>'Codon usage table'</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="316">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Find a &lt;div&gt; tag with class='col-xs-12 col-lg-8 text-center' in our souped webpage</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co">#soup.find('pre', href_='&lt;a href="/codon/A.html"&gt;A&lt;/a&gt;')</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="395">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>table <span class="op">=</span> soup.find(<span class="st">"pre"</span>).find(text<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(table)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+UUU  2.7(     3)  UCU  0.9(     1)  UAU 16.2(    18)  UGU  0.0(     0)
+UUC 20.8(    23)  UCC 19.0(    21)  UAC  9.9(    11)  UGC  9.9(    11)
+UUA  0.0(     0)  UCA  2.7(     3)  UAA  0.0(     0)  UGA  2.7(     3)
+UUG  3.6(     4)  UCG 19.9(    22)  UAG  0.9(     1)  UGG  9.9(    11)
+
+CUU  6.3(     7)  CCU  1.8(     2)  CAU 13.5(    15)  CGU 15.3(    17)
+CUC 39.7(    44)  CCC 16.2(    18)  CAC 13.5(    15)  CGC 39.7(    44)
+CUA  0.0(     0)  CCA  0.9(     1)  CAA  0.9(     1)  CGA  0.9(     1)
+CUG 37.9(    42)  CCG 34.3(    38)  CAG 27.1(    30)  CGG 16.2(    18)
+
+AUU  6.3(     7)  ACU  2.7(     3)  AAU  3.6(     4)  AGU  0.9(     1)
+AUC 26.2(    29)  ACC 40.6(    45)  AAC 20.8(    23)  AGC 15.3(    17)
+AUA  0.9(     1)  ACA  0.9(     1)  AAA  2.7(     3)  AGA  0.0(     0)
+AUG 17.1(    19)  ACG 26.2(    29)  AAG 43.3(    48)  AGG  2.7(     3)
+
+GUU  9.0(    10)  GCU  9.9(    11)  GAU 18.1(    20)  GGU  6.3(     7)
+GUC 36.1(    40)  GCC 70.4(    78)  GAC 35.2(    39)  GGC 53.2(    59)
+GUA  1.8(     2)  GCA  8.1(     9)  GAA 26.2(    29)  GGA  8.1(     9)
+GUG 26.2(    29)  GCG 51.4(    57)  GAG 37.9(    42)  GGG  8.1(     9)
+</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="318">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="319">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(table)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="319">
+<pre><code>bs4.element.NavigableString</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="320">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>codons <span class="op">=</span> table.text</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>codons</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="320">
+<pre><code>'\nUUU  2.7(     3)  UCU  0.9(     1)  UAU 16.2(    18)  UGU  0.0(     0)\nUUC 20.8(    23)  UCC 19.0(    21)  UAC  9.9(    11)  UGC  9.9(    11)\nUUA  0.0(     0)  UCA  2.7(     3)  UAA  0.0(     0)  UGA  2.7(     3)\nUUG  3.6(     4)  UCG 19.9(    22)  UAG  0.9(     1)  UGG  9.9(    11)\n\nCUU  6.3(     7)  CCU  1.8(     2)  CAU 13.5(    15)  CGU 15.3(    17)\nCUC 39.7(    44)  CCC 16.2(    18)  CAC 13.5(    15)  CGC 39.7(    44)\nCUA  0.0(     0)  CCA  0.9(     1)  CAA  0.9(     1)  CGA  0.9(     1)\nCUG 37.9(    42)  CCG 34.3(    38)  CAG 27.1(    30)  CGG 16.2(    18)\n\nAUU  6.3(     7)  ACU  2.7(     3)  AAU  3.6(     4)  AGU  0.9(     1)\nAUC 26.2(    29)  ACC 40.6(    45)  AAC 20.8(    23)  AGC 15.3(    17)\nAUA  0.9(     1)  ACA  0.9(     1)  AAA  2.7(     3)  AGA  0.0(     0)\nAUG 17.1(    19)  ACG 26.2(    29)  AAG 43.3(    48)  AGG  2.7(     3)\n\nGUU  9.0(    10)  GCU  9.9(    11)  GAU 18.1(    20)  GGU  6.3(     7)\nGUC 36.1(    40)  GCC 70.4(    78)  GAC 35.2(    39)  GGC 53.2(    59)\nGUA  1.8(     2)  GCA  8.1(     9)  GAA 26.2(    29)  GGA  8.1(     9)\nGUG 26.2(    29)  GCG 51.4(    57)  GAG 37.9(    42)  GGG  8.1(     9)\n'</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="321">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>codons_list <span class="op">=</span> re.split(<span class="st">'\(\s+\d+\)'</span>, codons)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>codons_list</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="321">
+<pre><code>['\nUUU  2.7',
+ '  UCU  0.9',
+ '  UAU 16.2',
+ '  UGU  0.0',
+ '\nUUC 20.8',
+ '  UCC 19.0',
+ '  UAC  9.9',
+ '  UGC  9.9',
+ '\nUUA  0.0',
+ '  UCA  2.7',
+ '  UAA  0.0',
+ '  UGA  2.7',
+ '\nUUG  3.6',
+ '  UCG 19.9',
+ '  UAG  0.9',
+ '  UGG  9.9',
+ '\n\nCUU  6.3',
+ '  CCU  1.8',
+ '  CAU 13.5',
+ '  CGU 15.3',
+ '\nCUC 39.7',
+ '  CCC 16.2',
+ '  CAC 13.5',
+ '  CGC 39.7',
+ '\nCUA  0.0',
+ '  CCA  0.9',
+ '  CAA  0.9',
+ '  CGA  0.9',
+ '\nCUG 37.9',
+ '  CCG 34.3',
+ '  CAG 27.1',
+ '  CGG 16.2',
+ '\n\nAUU  6.3',
+ '  ACU  2.7',
+ '  AAU  3.6',
+ '  AGU  0.9',
+ '\nAUC 26.2',
+ '  ACC 40.6',
+ '  AAC 20.8',
+ '  AGC 15.3',
+ '\nAUA  0.9',
+ '  ACA  0.9',
+ '  AAA  2.7',
+ '  AGA  0.0',
+ '\nAUG 17.1',
+ '  ACG 26.2',
+ '  AAG 43.3',
+ '  AGG  2.7',
+ '\n\nGUU  9.0',
+ '  GCU  9.9',
+ '  GAU 18.1',
+ '  GGU  6.3',
+ '\nGUC 36.1',
+ '  GCC 70.4',
+ '  GAC 35.2',
+ '  GGC 53.2',
+ '\nGUA  1.8',
+ '  GCA  8.1',
+ '  GAA 26.2',
+ '  GGA  8.1',
+ '\nGUG 26.2',
+ '  GCG 51.4',
+ '  GAG 37.9',
+ '  GGG  8.1',
+ '\n']</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="322">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>codon_list <span class="op">=</span> [i.strip() <span class="cf">for</span> i <span class="kw">in</span> codons_list]</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="kw">del</span> codon_list[<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>codon_list</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="322">
+<pre><code>['UUU  2.7',
+ 'UCU  0.9',
+ 'UAU 16.2',
+ 'UGU  0.0',
+ 'UUC 20.8',
+ 'UCC 19.0',
+ 'UAC  9.9',
+ 'UGC  9.9',
+ 'UUA  0.0',
+ 'UCA  2.7',
+ 'UAA  0.0',
+ 'UGA  2.7',
+ 'UUG  3.6',
+ 'UCG 19.9',
+ 'UAG  0.9',
+ 'UGG  9.9',
+ 'CUU  6.3',
+ 'CCU  1.8',
+ 'CAU 13.5',
+ 'CGU 15.3',
+ 'CUC 39.7',
+ 'CCC 16.2',
+ 'CAC 13.5',
+ 'CGC 39.7',
+ 'CUA  0.0',
+ 'CCA  0.9',
+ 'CAA  0.9',
+ 'CGA  0.9',
+ 'CUG 37.9',
+ 'CCG 34.3',
+ 'CAG 27.1',
+ 'CGG 16.2',
+ 'AUU  6.3',
+ 'ACU  2.7',
+ 'AAU  3.6',
+ 'AGU  0.9',
+ 'AUC 26.2',
+ 'ACC 40.6',
+ 'AAC 20.8',
+ 'AGC 15.3',
+ 'AUA  0.9',
+ 'ACA  0.9',
+ 'AAA  2.7',
+ 'AGA  0.0',
+ 'AUG 17.1',
+ 'ACG 26.2',
+ 'AAG 43.3',
+ 'AGG  2.7',
+ 'GUU  9.0',
+ 'GCU  9.9',
+ 'GAU 18.1',
+ 'GGU  6.3',
+ 'GUC 36.1',
+ 'GCC 70.4',
+ 'GAC 35.2',
+ 'GGC 53.2',
+ 'GUA  1.8',
+ 'GCA  8.1',
+ 'GAA 26.2',
+ 'GGA  8.1',
+ 'GUG 26.2',
+ 'GCG 51.4',
+ 'GAG 37.9',
+ 'GGG  8.1']</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="323">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>a, b <span class="op">=</span> <span class="bu">zip</span>(<span class="op">*</span>(s.split(<span class="st">"~"</span>) <span class="cf">for</span> s <span class="kw">in</span> x))</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>codon_key.append(re.split(<span class="st">'(\w[AUCG]+)'</span>, i))</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    codon_value.append(re.split(<span class="st">'(\d+\.\d+)'</span>, i))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>IndentationError: unexpected indent (640607889.py, line 4)</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="324">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>codon_list[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="324">
+<pre><code>'UCU  0.9'</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="325">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>codon_list</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="325">
+<pre><code>['UUU  2.7',
+ 'UCU  0.9',
+ 'UAU 16.2',
+ 'UGU  0.0',
+ 'UUC 20.8',
+ 'UCC 19.0',
+ 'UAC  9.9',
+ 'UGC  9.9',
+ 'UUA  0.0',
+ 'UCA  2.7',
+ 'UAA  0.0',
+ 'UGA  2.7',
+ 'UUG  3.6',
+ 'UCG 19.9',
+ 'UAG  0.9',
+ 'UGG  9.9',
+ 'CUU  6.3',
+ 'CCU  1.8',
+ 'CAU 13.5',
+ 'CGU 15.3',
+ 'CUC 39.7',
+ 'CCC 16.2',
+ 'CAC 13.5',
+ 'CGC 39.7',
+ 'CUA  0.0',
+ 'CCA  0.9',
+ 'CAA  0.9',
+ 'CGA  0.9',
+ 'CUG 37.9',
+ 'CCG 34.3',
+ 'CAG 27.1',
+ 'CGG 16.2',
+ 'AUU  6.3',
+ 'ACU  2.7',
+ 'AAU  3.6',
+ 'AGU  0.9',
+ 'AUC 26.2',
+ 'ACC 40.6',
+ 'AAC 20.8',
+ 'AGC 15.3',
+ 'AUA  0.9',
+ 'ACA  0.9',
+ 'AAA  2.7',
+ 'AGA  0.0',
+ 'AUG 17.1',
+ 'ACG 26.2',
+ 'AAG 43.3',
+ 'AGG  2.7',
+ 'GUU  9.0',
+ 'GCU  9.9',
+ 'GAU 18.1',
+ 'GGU  6.3',
+ 'GUC 36.1',
+ 'GCC 70.4',
+ 'GAC 35.2',
+ 'GGC 53.2',
+ 'GUA  1.8',
+ 'GCA  8.1',
+ 'GAA 26.2',
+ 'GGA  8.1',
+ 'GUG 26.2',
+ 'GCG 51.4',
+ 'GAG 37.9',
+ 'GGG  8.1']</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="326">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># codon_dict = {}</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co"># codon_value = []</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="co"># codon_key = []</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> codon_list:</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>    re.sub(<span class="st">'</span><span class="ch">\\</span><span class="st">s+'</span>,<span class="st">' '</span>, i)</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(codon_list)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>['UUU  2.7', 'UCU  0.9', 'UAU 16.2', 'UGU  0.0', 'UUC 20.8', 'UCC 19.0', 'UAC  9.9', 'UGC  9.9', 'UUA  0.0', 'UCA  2.7', 'UAA  0.0', 'UGA  2.7', 'UUG  3.6', 'UCG 19.9', 'UAG  0.9', 'UGG  9.9', 'CUU  6.3', 'CCU  1.8', 'CAU 13.5', 'CGU 15.3', 'CUC 39.7', 'CCC 16.2', 'CAC 13.5', 'CGC 39.7', 'CUA  0.0', 'CCA  0.9', 'CAA  0.9', 'CGA  0.9', 'CUG 37.9', 'CCG 34.3', 'CAG 27.1', 'CGG 16.2', 'AUU  6.3', 'ACU  2.7', 'AAU  3.6', 'AGU  0.9', 'AUC 26.2', 'ACC 40.6', 'AAC 20.8', 'AGC 15.3', 'AUA  0.9', 'ACA  0.9', 'AAA  2.7', 'AGA  0.0', 'AUG 17.1', 'ACG 26.2', 'AAG 43.3', 'AGG  2.7', 'GUU  9.0', 'GCU  9.9', 'GAU 18.1', 'GGU  6.3', 'GUC 36.1', 'GCC 70.4', 'GAC 35.2', 'GGC 53.2', 'GUA  1.8', 'GCA  8.1', 'GAA 26.2', 'GGA  8.1', 'GUG 26.2', 'GCG 51.4', 'GAG 37.9', 'GGG  8.1']</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="327">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(codon_list)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="327">
+<pre><code>list</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="328">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>codon_key, codon_value <span class="op">=</span> <span class="bu">zip</span>(<span class="op">*</span>(s.split(<span class="st">" "</span>) <span class="cf">for</span> s <span class="kw">in</span> codon_list))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="329">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>codon_value <span class="op">=</span> <span class="bu">list</span>(codon_value)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="330">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>codon_value.remove(<span class="st">''</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="331">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>codon_value</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="331">
+<pre><code>['',
+ '16.2',
+ '',
+ '20.8',
+ '19.0',
+ '',
+ '',
+ '',
+ '',
+ '',
+ '',
+ '',
+ '19.9',
+ '',
+ '',
+ '',
+ '',
+ '13.5',
+ '15.3',
+ '39.7',
+ '16.2',
+ '13.5',
+ '39.7',
+ '',
+ '',
+ '',
+ '',
+ '37.9',
+ '34.3',
+ '27.1',
+ '16.2',
+ '',
+ '',
+ '',
+ '',
+ '26.2',
+ '40.6',
+ '20.8',
+ '15.3',
+ '',
+ '',
+ '',
+ '',
+ '17.1',
+ '26.2',
+ '43.3',
+ '',
+ '',
+ '',
+ '18.1',
+ '',
+ '36.1',
+ '70.4',
+ '35.2',
+ '53.2',
+ '',
+ '',
+ '26.2',
+ '',
+ '26.2',
+ '51.4',
+ '37.9',
+ '']</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="398">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>table <span class="op">=</span> soup.find(<span class="st">"strong"</span>)</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(table)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;strong&gt;&lt;i&gt;Ancylobacter aquaticus &lt;/i&gt;[gbbct]: 4 CDS's (1108 codons)&lt;/strong&gt;</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="383">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="bu">str</span>(table).split(<span class="st">'&lt;i&gt;'</span>)[<span class="dv">1</span>].split(<span class="st">'&lt;/i&gt;'</span>)[<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="383">
+<pre><code>'Ancylobacter aquaticus '</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="388">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="bu">str</span>(table).split(<span class="st">' ('</span>)[<span class="dv">1</span>].split(<span class="st">')&lt;/str'</span>)[<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="388">
+<pre><code>'1108 codons'</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="401">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="bu">str</span>(table).split(<span class="st">'&gt;[gb'</span>)[<span class="dv">1</span>].split(<span class="st">']: '</span>)[<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="401">
+<pre><code>'bct'</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="376">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>match <span class="op">=</span> re.search(<span class="st">'&lt;i&gt;\w+&lt;/i&gt;'</span>,<span class="bu">str</span>(table))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="378">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>match</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="391">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co">#soup = BeautifulSoup(html,"lxml")</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a><span class="co">#('gb\w{3}') for gbbct</span></span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>table <span class="op">=</span> soup.findAll(<span class="st">"strong"</span>, text<span class="op">=</span> re.<span class="bu">compile</span>(<span class="st">'\['</span>))</span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(table)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[]</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="66">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>project_href <span class="op">=</span> [i[<span class="st">'href'</span>] <span class="cf">for</span> i <span class="kw">in</span> soup.find_all(<span class="st">'a'</span>, href<span class="op">=</span><span class="va">True</span>)]</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(project_href)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>KeyError: 'pre'</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="39">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>r <span class="op">=</span> re.<span class="bu">compile</span>(<span class="st">'codon\/cgi\-bin\/showcodon\.cgi\?species=\d{1,10}'</span>)</span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>filtered_href <span class="op">=</span> <span class="bu">list</span>(<span class="bu">filter</span>(r.search, project_href))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="49">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>(filtered_href)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="49">
+<pre><code>1510</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="52">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>filtered_href <span class="op">=</span> [<span class="st">'https://www.kazusa.or.jp'</span><span class="op">+</span>i <span class="cf">for</span> i <span class="kw">in</span> filtered_href]</span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>(filtered_href)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="52">
+<pre><code>1510</code></pre>
+</div>
+</div>
+
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
