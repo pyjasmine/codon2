@@ -8,5 +8,15 @@
       "/posts/04-DnaType-Classification.html",
       "/posts/05-Kingdom-Classification.html"
     ]
+  },
+  {
+    "listing": "/ccp.html",
+    "items": [
+      "/posts/01-Introduction .html",
+      "/posts/02-Data-Cleaning.html",
+      "/posts/03-Exploratory-Data-Analysis.html",
+      "/posts/04-DnaType-Classification.html",
+      "/posts/05-Kingdom-Classification.html"
+    ]
   }
 ]

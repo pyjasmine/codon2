@@ -6,10 +6,10 @@ website:
   navbar:
     left:
       - about.qmd
-      - icon: github
-        href: https://github.com/pyjasmine
       - text: 'Codon Classification Project'
         file: ccp.qmd
+      - icon: github
+        href: https://github.com/pyjasmine
 format:
   html:
     theme: flatly
