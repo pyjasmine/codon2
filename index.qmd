@@ -1,5 +1,5 @@
 ---
-title: "codon classification project"
+title: "Codon Classification Project"
 listing:
   contents: posts
   sort: "title"
